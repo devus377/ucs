@@ -236,18 +236,22 @@ for (let row of data) {
 console.log(sum);*/
 
 // nodeList
-let listItems = document.querySelectorAll("#list li");
-let listItemsArr = [...listItems]; // формируем массив на основе nodeList
-console.log(listItemsArr);
-console.log([1, 2, 3]);
+// let listItems = document.querySelectorAll("#list li");
+// let listItemsArr = [...listItems]; // формируем массив на основе nodeList
+// console.log(listItemsArr);
+// console.log([1, 2, 3]);
 
-// for...in
-let student = {
-  firstName: "Igor",
-  lastName: "Pronkin",
-  age: 34,
-  phone: "8-916-341-38-35",
-  city: "Moscow",
-  "house number": 33,
-  street: "Chertanovskaya",
-};
+// // for...in
+// let student = {
+//   firstName: "Igor",
+//   lastName: "Pronkin",
+//   age: 34,
+//   phone: "8-916-341-38-35",
+//   city: "Moscow",
+//   "house number": 33,
+//   street: "Chertanovskaya",
+// };
+
+function nameUser(user, age) {
+  return `<p>${user} + " " + ${age}</p>`
+}
