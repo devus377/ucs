@@ -1,0 +1,33 @@
+
+
+
+
+
+/* Общий фон белый с белым бордюром с закруглением */
+.head_1 {
+    background: hsl(0, 0%, 100%)
+    border: 3px solid hsl(0, 0%, 100%);
+    border-radius: 9px;
+
+}
+
+
+/* картинка 1440 по центру с круглением */
+.images-q {
+    width: 30%;
+    border: 3px solid blue;
+    border-radius: 9%;
+
+}
+
+/* заголовок 1 большой по центру*/
+.h_txt1 {
+    background: hsl(0, 0%, 100%)
+
+}
+
+/* Заголовок 2 средний по центру */
+.h_txt2 {
+    background: hsl(0, 0%, 100%)
+
+}
