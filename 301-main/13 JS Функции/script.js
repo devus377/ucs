@@ -52,9 +52,9 @@ function sayHello(name) {
   greet.textContent = `Привет, ${name}!!!`;
 }
 
-fName.addEventListener("blur", function () {
+let checkInput = function () {
   // получаем знчение из поля ввода
-  let value = fName.value;
+  let value = this.value;
 
   // если value не пустая строка, вызываем функцию
   // псевдоложные значения '', 0, NaN, null, undefined
@@ -67,7 +67,11 @@ fName.addEventListener("blur", function () {
 
   // очищаем поле ввода
   fName.value = "";
-});
+
+}
+
+fName.addEventListener("blur", checkInput);
+lName.addEventListener("blur", checkInput());
 */
 
 // return
@@ -140,41 +144,78 @@ sayHello();
 
 // console.log(sum1, sum2);
 
-
-let bill = [399, 599, 599, 199, 199, 649, 899, 499, 1199];
-let bill2 = [456, 567, 127, 649, 499, 1199];
-let tip = 10; // 10%
-
-// // 1. получить сумму счета
-// function getSum(userMas) {
-//   let sum = 0;
-//   for (let item of userMas) {
-//     sum += userMas[i];
-//   }
-//   return sum;
+// всплытие
+// console.log(sayHello("Анна"));
+// определение функции
+// function sayHello(userName) {
+//   return `Привет, ${userName}!!!`;
 // }
 
-// // 2. получить сумму счета с учетом чаевых и отдельно сумму чаевых
-//  function getSumWithTip(getSum, tip) {
-//   let sum = 0;
-//   for (let item of userMas) {
-//     sum += getSum[i] * (tip / 100);
-//     sumTip = getSum[i] * (100 - tip);
-//   }
-//   return sum;
-// }
-// // function getSumWithTip(userMas, tip) {
-// //   let sum = 0;
-// //   for (let item of userMas) {
-// //     sum += userMas[i] * tip;
-// //   }
-// //   return sum;
-// // }
+// функциональное выражение
+//console.log(sayHello("Анна"));
+// let sayHello = function (userName) {
+//   return `Привет, ${userName}!!!`;
+// };
 
-// // 3. сформировать для клиента данные о счете и вывести в документ
-// function printBill(userMas, tip) {
-//   let sum = getSum(userMas);
-//   let sumWithTip = getSumWithTip(userMas, tip);
-//   console.log(`Сумма счета: ${sum}`);
-//   console.log(`Сумма счета с учетом чаевых: ${sumWithTip}`);
-//
+// стрелочная функция
+// let sayHello = (userName) => `Привет, ${userName}!!!`;
+// console.log(sayHello("Анна"));
+
+/**
+ * расчет значений для формирвоания данных по счету
+ */
+
+let bill = [399, 599, 599, 199, 199, 649, 899, 499, 199, 345, 11.3];
+let bill1 = [456, 567, 127, 649, 499, 1199];
+let tip = 7; // 10%
+// let discount = 12;
+
+// 1. получить сумму счета
+// 2. получить сумму счета с учетом чаевых
+// функция расчета должна возвращать сумму счета с учетом чаевых и сумму чаевых
+// 3. сформировать для клиента данные о счете и вывести в документ
+
+// 1. получить сумму счета
+function getSumm(billPar) {
+  let sum = 0;
+  for (let item of billPar) {
+    sum += item;
+  }
+  return Math.floor(sum);
+  //return billPar.reduce((acc, currVal) => acc + currVal);
+}
+
+let summBill = getSumm(bill);
+console.log(summBill);
+
+// 2. получить сумму счета с учетом чаевых
+function getSummTip(summBillPar, tipPar) {
+  //1 получить сумму чаевых
+  let tipValue = Math.floor((summBillPar * tipPar) / 100);
+  //2 получить сумму счета с учетом чаевых
+  let billTip = summBillPar + tipValue;
+
+  return { tipValue: tipValue, billTip: billTip };
+  // return { tipValue, billTip };
+  // {tipValue: 321, billTip: 4918}
+}
+let totalBillTip = getSummTip(summBill, tip);
+console.log(totalBillTip);
+
+// 3. сформировать для клиента данные о счете и вывести в документ
+function makeBillInfo(totalBillTipPar, summBillPar) {
+  return `
+    <div class="bill-info">
+      <h3>Сумма счета за обед:</h3>
+      <p>Сумма счета: ${summBillPar}₽</p>
+      <p>Сумма чаевых: ${totalBillTipPar.tipValue}₽</p>
+      <h3>Итого: ${totalBillTipPar.billTip}₽</h3>
+    </div>
+  `;
+}
+
+let total = makeBillInfo(totalBillTip, summBill);
+
+let billContainer = document.querySelector("#bill");
+billContainer.insertAdjacentHTML("beforeend", total);
+billContainer.insertAdjacentHTML("beforeend", total);
